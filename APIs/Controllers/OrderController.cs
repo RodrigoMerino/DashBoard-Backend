@@ -21,13 +21,7 @@ namespace APIs.Controllers
             _OrderService = ordersService;
             _Context = context;
         }
-        /*
-        [HttpGet]
-        public IActionResult getorderss() {
-          var orders =  _Context.Order.ToList();
-            return Ok(orders);
-        }
-        */
+     
 
         [HttpGet]
         public IActionResult GetOrders(int PageNumber, int PageSize)
@@ -57,22 +51,6 @@ namespace APIs.Controllers
         [HttpGet("ByState")]
         public async Task  <IActionResult> ByState()
         {
-            //problema de statemachine con awaiter
-            /*
-            var orders =  _Context.Order.Include(x => x.CustomerIdNavigation).ToList();
-
-            var groupResult = orders.GroupBy(x => x.CustomerId)
-                .ToList()
-                .Select(group => new OrderCustomEntity
-                {
-                    State = group.Key,
-                    Total = group.Sum(x => x.Total)
-                }).OrderByDescending(res => res.Total)
-                .ToList();
-
-            return Ok(groupResult);
-            */
-
             var orders = await _OrderService.GetByState();
 
             var response = new ApiResponse<List<OrderCustomEntity>>(orders) { };
@@ -82,21 +60,6 @@ namespace APIs.Controllers
         [HttpGet("ByCustomer/{id}")]
         public async Task<IActionResult> ByCustomer(int id)
         {
-            //problema de statemachine con awaiter
-            /*
-            var orders =  _Context.Order.Include(x => x.CustomerIdNavigation).ToList();
-
-            var groupResult = orders.GroupBy(x => x.CustomerId)
-                .ToList()
-                .Select(group => new OrderCustomEntity
-                {
-                    State = group.Key,
-                    Total = group.Sum(x => x.Total)
-                }).OrderByDescending(res => res.Total)
-                .ToList();
-
-            return Ok(groupResult);
-            */
             var orders = await _OrderService.GetByCustomer(id);
 
             var response = new ApiResponse<List<OrderCustomEntity>>(orders) { };

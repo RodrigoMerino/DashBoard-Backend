@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace APIs.Repositories
 {
-    public class CustomerRepository
+    public class SeedRepository
     {
         private readonly DashBoardContext _Context;
-        public CustomerRepository(DashBoardContext context)
+        public SeedRepository(DashBoardContext context)
         {
             _Context = context;
         }

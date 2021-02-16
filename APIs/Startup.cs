@@ -39,7 +39,7 @@ namespace APIs
             });
 
             services.AddMvc(options => options.EnableEndpointRouting = false);
-            services.AddTransient<CustomerRepository>();
+            services.AddTransient<SeedRepository>();
 
             services.AddTransient<IOrdersService,OrdersService>();
             services.AddTransient<IServerService,ServerService>();
@@ -56,7 +56,7 @@ namespace APIs
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, CustomerRepository seed)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, SeedRepository seed)
         {
             if (env.IsDevelopment())
             {
